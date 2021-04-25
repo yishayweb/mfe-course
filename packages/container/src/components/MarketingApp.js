@@ -16,13 +16,17 @@ export default () => {
           history.push(nextPathname);
         }
       },
-      // this is something I added for the case that user refreshes page on a route that is not "/"
-      // it will be evaluated on the mount function in marketing bootstrap file
-      // initialPathname: history.location.pathname,
     });
+
+    console.log("in marketing");
+    console.log(onParentNavigate);
 
     history.listen(onParentNavigate);
   }, []);
 
   return <div ref={ref} />;
 };
+
+// this is something I added for the case that user refreshes page on a route that is not "/"
+// it will be evaluated on the mount function in marketing bootstrap file
+// initialPathname: history.location.pathname,

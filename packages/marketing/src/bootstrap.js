@@ -14,14 +14,6 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
     history.listen(onNavigate);
   }
 
-  // in case user refreshes the page on a route that is not "/" we need
-  // to tell the memory history router to go to the route that was requested
-  // otherwise it will just give the "/" route
-  // this is only true for production because in development we use browser history router
-  // if (initialPathname !== "/") {
-  //   history.push(initialPathname);
-  // }
-
   ReactDom.render(<App history={history} />, el);
 
   return {
@@ -44,3 +36,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export { mount };
+
+// in case user refreshes the page on a route that is not "/" we need
+// to tell the memory history router to go to the route that was requested
+// otherwise it will just give the "/" route
+// this is only true for production because in development we use browser history router
+// if (initialPathname !== "/") {
+//   history.push(initialPathname);
+// }
