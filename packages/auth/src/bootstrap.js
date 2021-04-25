@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import App from "./App";
 import { createMemoryHistory, createBrowserHistory } from "history";
 
-const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (el, { onNavigate, defaultHistory, initialPath, onSignIn }) => {
   const history =
     defaultHistory ||
     createMemoryHistory({
@@ -14,15 +14,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
     history.listen(onNavigate);
   }
 
-  // in case user refreshes the page on a route that is not "/" we need
-  // to tell the memory history router to go to the route that was requested
-  // otherwise it will just give the "/" route
-  // this is only true for production because in development we use browser history router
-  // if (initialPathname !== "/") {
-  //   history.push(initialPathname);
-  // }
-
-  ReactDom.render(<App history={history} />, el);
+  ReactDom.render(<App history={history} onSignIn={onSignIn} />, el);
 
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {
@@ -36,7 +28,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
 };
 
 if (process.env.NODE_ENV === "development") {
-  const devRoot = document.querySelector("#_marketing-dev-root");
+  const devRoot = document.querySelector("#_auth-dev-root");
 
   if (devRoot) {
     mount(devRoot, { defaultHistory: createBrowserHistory() });

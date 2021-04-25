@@ -1,8 +1,8 @@
-import { mount } from "marketing/MarketingApp";
+import { mount } from "auth/AuthApp";
 import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ onSignIn }) => {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -16,9 +16,7 @@ export default () => {
           history.push(nextPathname);
         }
       },
-      // this is something I added for the case that user refreshes page on a route that is not "/"
-      // it will be evaluated on the mount function in marketing bootstrap file
-      // initialPathname: history.location.pathname,
+      onSignIn,
     });
 
     history.listen(onParentNavigate);
