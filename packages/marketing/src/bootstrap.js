@@ -10,6 +10,8 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
       initialEntries: [initialPath],
     });
 
+  console.log("in marketing file");
+
   if (onNavigate) {
     history.listen(onNavigate);
   }
