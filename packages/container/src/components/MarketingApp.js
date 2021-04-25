@@ -18,9 +18,6 @@ export default () => {
       },
     });
 
-    console.log("in marketing");
-    console.log(onParentNavigate);
-
     history.listen(onParentNavigate);
   }, []);
 
